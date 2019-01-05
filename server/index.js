@@ -14,7 +14,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 
 
-app.get('/videos/api', (req, res) => {
+app.get('/api/videos', (req, res) => {
   Videos.reset()
     .fetch()
     .then((videos) => {
@@ -22,7 +22,7 @@ app.get('/videos/api', (req, res) => {
     });
 });
 
-app.get('/users/api', (req, res) => {
+app.get('/api/users', (req, res) => {
   Users.reset()
     .fetch()
     .then((users) => {
