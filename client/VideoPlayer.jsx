@@ -7,9 +7,9 @@ const VideoPlayer = (props) => (
         src="https://player.twitch.tv/?video=v350462971&autoplay=false"
         height="720"
         width="1280"
-        frameborder="5"
+        frameBorder="5"
         scrolling="no"
-        allowfullscreen="true">
+        allowFullScreen="true">
       </iframe>
     </div>
     <div className="video-player-details">
