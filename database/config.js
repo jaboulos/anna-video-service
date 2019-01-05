@@ -12,9 +12,6 @@ let knex = require('knex')({
     user: 'taco',
     password: 'tuesday',
     database: 'twitchvid'
-  },
-  seeds: {
-    directory: path.join(__dirname, '../client')
   }
 });
 
