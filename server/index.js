@@ -9,7 +9,8 @@ app.use(express.urlencoded({extended: true, }));
 app.use(express.static(path.join(__dirname, '../public')));
 
 app.get('/', (req, res) => {
-
+  console.log('Made it');
+  res.send('200');
 });
 
 app.listen(port, () => {

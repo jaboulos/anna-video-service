@@ -1,3 +1,9 @@
+/*
+  TODO:
+
+    -Include code for creating 'twitchvid' DB and user information for migration
+*/
+
 let knex = require('knex')({
   client: 'pg',
   connection: {
@@ -10,7 +16,7 @@ let knex = require('knex')({
 let db = require('bookshelf')(knex);
 
 db.knex.schema.hasTable('channel_mstr').then(function(exists) {
-  if(!exists) {
+  if (!exists) {
     db.knex.schema.createTable('channel_mstr', function(table) {
       table.increments('id').primary();
       table.integer('id_channel').unique();
@@ -33,7 +39,7 @@ db.knex.schema.hasTable('channel_mstr').then(function(exists) {
 });
 
 db.knex.schema.hasTable('vid_mstr').then(function(exists) {
-  if(!exists) {
+  if (!exists) {
     db.knex.schema.createTable('vid_mstr', function(table) {
       table.increments('id').primary();
       table.integer('vid_id').unique();
@@ -52,7 +58,7 @@ db.knex.schema.hasTable('vid_mstr').then(function(exists) {
 });
 
 db.knex.schema.hasTable('vid_dtl').then(function(exists) {
-  if(!exists) {
+  if (!exists) {
     db.knex.schema.createTable('vid_dtl', function(table) {
       table.increments('id').primary();
       table.integer('id_vid_mstr');
@@ -63,28 +69,28 @@ db.knex.schema.hasTable('vid_dtl').then(function(exists) {
       table.string('tag_list', 144);
     }).then(function(table) {
       console.log('Created Table: ', table);
-  });
+    });
   }
 });
 
 db.knex.schema.hasTable('game_mstr').then(function(exists) {
-  if(!exists) {
+  if (!exists) {
     db.knex.schema.createTable('game_mstr', function(table) {
       table.increments('id').primary();
       table.integer('id_vid_mstr');
       table.foreign('id_vid_mstr').references('vid_mstr.vid_id');
       table.string('title', 144);
       table.string('thumbnail_type', 144);
-      table.string('thumbnail_url' ,144);
+      table.string('thumbnail_url' , 144);
       table.string('image_size', 144);
     }).then(function(table) {
       console.log('Created Table: ', table);
-  });
+    });
   }
 });
 
 db.knex.schema.hasTable('vid_description').then(function(exists) {
-  if(!exists) {
+  if (!exists) {
     db.knex.schema.createTable('vid_description', function(table) {
       table.increments('id').primary();
       table.integer('id_vid_mstr');
