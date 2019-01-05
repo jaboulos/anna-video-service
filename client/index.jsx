@@ -9,6 +9,7 @@ class App extends React.Component {
     this.state = {
       isLoaded: false,
       error: null,
+      users: {},
       videos: [],
       video: {}
     };

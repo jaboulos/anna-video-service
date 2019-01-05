@@ -10,8 +10,8 @@
   "scripts": {
     "test": "jest",
     "dev:react": "webpack -d --watch",
-    "build": "webpack --mode production",
-    "start": "nodemon ./server/index.js"
+    "start": "nodemon ./server/index.js",
+    "seed": "knex seed:run"
   },
   "dependencies": {
     "axios": "^0.18.0",

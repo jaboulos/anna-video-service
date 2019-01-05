@@ -1600,8 +1600,34 @@ const sampleVideos = {
       type: 'highlight',
       duration: '6m29s'
     }
-  ],
-  pagination: {
-    cursor: 'eyJiIjpudWxsLCJhIjp7Ik9mZnNldCI6MTAwfX0'
-  }
+  ]
+};
+
+const sampleUser = {
+  data: [
+    {
+      id: '19070311',
+      login: 'a_seagull',
+      display_name: 'A_Seagull',
+      type: '',
+      broadcaster_type: 'partner',
+      description: 'COMPETITIVE GAMING ENTHUSIAST',
+      profile_image_url: 'https://static-cdn.jtvnw.net/jtv_user_pictures/a_seagull-profile_image-4d2d235688c7dc66-300x300.png',
+      offline_image_url: 'https://static-cdn.jtvnw.net/jtv_user_pictures/f755a397-2b1c-45d8-a418-8893c6811755-channel_offline_image-1920x1080.png',
+      view_count: 27857135
+    }
+  ]
+};
+
+exports.seed = function(knex, Promise) {
+  return knex('users').del()
+    .then(() => {
+      return knex('videos').del();
+    })
+    .then(() => {
+      return knex('users').insert(sampleUser.data);
+    })
+    .then(() => {
+      return knex('videos').insert(sampleVideos.data);
+    });
 };
