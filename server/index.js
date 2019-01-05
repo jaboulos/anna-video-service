@@ -1,10 +1,10 @@
 const express = require('express');
 const path = require('path');
 const db = require('../database/config.js');
+const Videos = require('../database/collections/videos.js');
 const Video = require('../database/models/video.js');
 const Users = require('../database/collections/users.js');
 const User = require('../database/models/user.js');
-const Videos = require('../database/collections/videos.js');
 const app = express();
 const port = 3049;
 
@@ -19,6 +19,14 @@ app.get('/videos/api', (req, res) => {
     .fetch()
     .then((videos) => {
       res.status(200).send(videos.models);
+    });
+});
+
+app.get('/users/api', (req, res) => {
+  Users.reset()
+    .fetch()
+    .then((users) => {
+      res.status(200).send(users.models);
     });
 });
 
