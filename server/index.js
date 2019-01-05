@@ -1,15 +1,15 @@
 const express = require('express');
+const path = require('path');
 const db = require('../database/config.js');
 const app = express();
-const port = 3010;
+const port = 3049;
 
 app.use(express.json());
-app.use(express.urlencoded({
-  extended: true,
-  })
-);
+app.use(express.urlencoded({extended: true, }));
+app.use(express.static(path.join(__dirname, '../public')));
 
 app.get('/', (req, res) => {
+
 });
 
 app.listen(port, () => {

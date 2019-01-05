@@ -40,7 +40,8 @@ npm install
 TODO:
 
 -Instructions for installing postgresql
+  -brew install postgresql
 -Instructions for initializing postgresql
   -Login user: taco
   -password: tuesday
-  -To connect: psql -d postgres -u taco
+  -To connect: psql -d twitchvid -u taco
