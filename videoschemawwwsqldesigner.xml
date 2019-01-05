@@ -37,152 +37,88 @@
 		<type label="SET" length="1" sql="SET" quote=""/>
 		<type label="Bit" length="0" sql="bit" quote=""/>
 	</group>
-</datatypes><table x="809" y="146" name="vid_mstr">
+</datatypes><table x="890" y="243" name="Users">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="vid_id" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
+<row name="user_id" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
 <default>NULL</default></row>
-<row name="channel_id" null="0" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NOT NULL</default><relation table="channel_mstr" row="id_channel" />
-</row>
-<row name="created_at" null="1" autoincrement="0">
-<datatype>DATETIME</datatype>
-<default>NULL</default></row>
-<row name="published_at" null="1" autoincrement="0">
-<datatype>DATETIME</datatype>
-<default>NULL</default></row>
-<row name="length" null="1" autoincrement="0">
-<datatype>TIMESTAMP</datatype>
-<default>NULL</default></row>
-<row name="url" null="1" autoincrement="0">
-<datatype>CHAR</datatype>
-<default>NULL</default></row>
-<row name="title" null="1" autoincrement="0">
-<datatype>CHAR</datatype>
-<default>NULL</default></row>
-<row name="language" null="1" autoincrement="0">
-<datatype>CHAR</datatype>
-<default>NULL</default></row>
-<key type="PRIMARY" name="">
-<part>id</part>
-<part>vid_id</part>
-</key>
-</table>
-<table x="1277" y="434" name="channel_mstr">
-<row name="id" null="1" autoincrement="1">
-<datatype>INTEGER</datatype>
-<default>NULL</default></row>
-<row name="id_channel" null="0" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NOT NULL</default></row>
-<row name="name" null="1" autoincrement="0">
-<datatype>CHAR</datatype>
-<default>NULL</default></row>
-<row name="url" null="1" autoincrement="0">
-<datatype>CHAR</datatype>
+<row name="login" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
 <default>NULL</default></row>
 <row name="display_name" null="1" autoincrement="0">
-<datatype>CHAR</datatype>
+<datatype>VARCHAR</datatype>
 <default>NULL</default></row>
-<row name="logo" null="1" autoincrement="0">
-<datatype>CHAR</datatype>
+<row name="type" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
 <default>NULL</default></row>
-<row name="language" null="1" autoincrement="0">
-<datatype>CHAR</datatype>
+<row name="broadcaster_type" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
 <default>NULL</default></row>
-<row name="partner" null="1" autoincrement="0">
-<datatype>CHAR</datatype>
+<row name="description" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
 <default>NULL</default></row>
-<row name="mature" null="1" autoincrement="0">
-<datatype>CHAR</datatype>
+<row name="profile_image_url" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
 <default>NULL</default></row>
-<row name="email" null="1" autoincrement="0">
-<datatype>CHAR</datatype>
+<row name="offline_image_url" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
 <default>NULL</default></row>
-<row name="views" null="1" autoincrement="0">
+<row name="view_count" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="followers" null="1" autoincrement="0">
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<comment>Table that stores Twitch user information</comment>
+</table>
+<table x="660" y="209" name="Videos">
+<row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="user_id" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default></row>
+<row name="user_name" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default></row>
+<row name="title" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default></row>
+<row name="description" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
 <default>NULL</default></row>
 <row name="created_at" null="1" autoincrement="0">
-<datatype>DATETIME</datatype>
+<datatype>VARCHAR</datatype>
 <default>NULL</default></row>
-<row name="updated_at" null="1" autoincrement="0">
-<datatype>DATETIME</datatype>
+<row name="published_at" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
 <default>NULL</default></row>
-<key type="PRIMARY" name="">
-<part>id</part>
-<part>id_channel</part>
-</key>
-<comment>stores streamer information</comment>
-</table>
-<table x="412" y="109" name="vid_dtl">
-<row name="id" null="1" autoincrement="1">
-<datatype>INTEGER</datatype>
-<default>NULL</default></row>
-<row name="id_vid_mstr" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><relation table="vid_mstr" row="vid_id" />
-</row>
-<row name="fps" null="1" autoincrement="0">
-<datatype>CHAR</datatype>
-<default>NULL</default></row>
-<row name="preview_url" null="1" autoincrement="0">
-<datatype>CHAR</datatype>
-<default>NULL</default></row>
-<row name="resolution" null="1" autoincrement="0">
-<datatype>CHAR</datatype>
-<default>NULL</default></row>
-<row name="tag_list" null="1" autoincrement="0">
-<datatype>CHAR</datatype>
-<default>NULL</default></row>
-<key type="PRIMARY" name="">
-<part>id</part>
-</key>
-<comment>Stores details of video including fps, preview image, resolution, and thumbnail. MIght need to include muted segments</comment>
-</table>
-<table x="327" y="367" name="game_mstr">
-<row name="id" null="1" autoincrement="1">
-<datatype>INTEGER</datatype>
-<default>NULL</default></row>
-<row name="id_vid_mstr" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><relation table="vid_mstr" row="vid_id" />
-</row>
-<row name="title" null="1" autoincrement="0">
-<datatype>CHAR</datatype>
-<default>NULL</default></row>
-<row name="thumbnail_type" null="1" autoincrement="0">
-<datatype>CHAR</datatype>
+<row name="url" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
 <default>NULL</default></row>
 <row name="thumbnail_url" null="1" autoincrement="0">
-<datatype>CHAR</datatype>
+<datatype>VARCHAR</datatype>
 <default>NULL</default></row>
-<row name="image_size" null="1" autoincrement="0">
-<datatype>CHAR</datatype>
+<row name="viewable" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default></row>
+<row name="view_count" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="language" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default></row>
+<row name="type" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default></row>
+<row name="duration" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
 <default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
-<comment>table for category name and video associated with category. A many-to-one relationship.</comment>
-</table>
-<table x="366" y="623" name="description">
-<row name="id" null="1" autoincrement="1">
-<datatype>INTEGER</datatype>
-<default>NULL</default></row>
-<row name="id_vid_mstr" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><relation table="vid_mstr" row="vid_id" />
-</row>
-<row name="description_title" null="1" autoincrement="0">
-<datatype>CHAR</datatype>
-<default>NULL</default></row>
-<key type="PRIMARY" name="">
-<part>id</part>
-</key>
+<comment>This table stores the Twitch Videos</comment>
 </table>
 </sql>
