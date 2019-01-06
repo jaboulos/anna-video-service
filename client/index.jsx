@@ -16,7 +16,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('http://127.0.0.1/3049/api/videos')
+    axios.get('http://127.0.0.1:3049/api/videos')
       .then((result) => {
         console.log('See result: ', result);
         console.log('See Data? ', result.data);

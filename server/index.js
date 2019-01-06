@@ -6,8 +6,10 @@ const Video = require('../database/models/video.js');
 const Users = require('../database/collections/users.js');
 const User = require('../database/models/user.js');
 const app = express();
+const cors = require('cors');
 const port = 3049;
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true, }));
 app.use(express.static(path.join(__dirname, '../public')));
