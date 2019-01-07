@@ -19,8 +19,6 @@ class App extends React.Component {
   componentDidMount() {
     axios.get('http://127.0.0.1:3049/api/videos')
       .then((result) => {
-        console.log('See result: ', result);
-        console.log('See Data? ', result.data);
         this.setState({
           isLoaded: true,
           videos: result.data,
@@ -43,7 +41,7 @@ class App extends React.Component {
     } else {
       return (
         <div>
-          <VideoPlayer video={this.state.video}/>
+          <VideoCollection videos={this.state.videos} />
         </div>
       );
     }
