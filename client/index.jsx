@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import VideoPlayer from './VideoPlayer.jsx';
+import VideoCollection from './VideoCollection.jsx';
 
 class App extends React.Component {
   constructor(props) {
