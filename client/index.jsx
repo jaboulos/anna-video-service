@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import VideoPlayer from './VideoPlayer.jsx';
-import VideoCollection from './VideoCollection.jsx';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 class App extends React.Component {
   constructor(props) {
@@ -11,8 +11,8 @@ class App extends React.Component {
       isLoaded: false,
       error: null,
       users: [],
-      videos: [],
-      video: {}
+      games: [],
+      videos: null
     };
   }
 
@@ -22,7 +22,6 @@ class App extends React.Component {
         this.setState({
           isLoaded: true,
           videos: result.data,
-          video: result.data[0]
         });
       }, (error) => {
         console.log('Error retrieving videos: ', error);
@@ -40,9 +39,32 @@ class App extends React.Component {
       return <div>Loading...</div>;
     } else {
       return (
-        <div>
-          <VideoCollection videos={this.state.videos} />
-        </div>
+        <Router>
+          <div>
+            <Route exact={true} path="/" render={() => (
+              <div className="preview-card">
+                {this.state.videos.map((video) => {
+                  return (
+                    <li>
+                      <Link to={`videos/${video.id}`}>
+                        <img src={video.thumbnail_url}/>
+                        <div>{video.title}</div>
+                      </Link>
+                      <div>{video.user_name}</div>
+                      <div>Game title goes here</div>
+                      <div>Duration: {video.duration}</div>
+                    </li>
+                  );
+                })}
+              </div>
+            )}/>
+            {this.state.videos && (
+              <Route path='/videos/:videoId' render={({match}) => (
+                <VideoPlayer video={this.state.videos.find(video => video.id.toString() === match.params.videoId )}/>
+              )}/>
+            )}
+          </div>
+        </Router>
       );
     }
   }
