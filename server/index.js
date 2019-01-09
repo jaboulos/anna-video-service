@@ -5,6 +5,8 @@ const Videos = require('../database/collections/videos.js');
 const Video = require('../database/models/video.js');
 const Users = require('../database/collections/users.js');
 const User = require('../database/models/user.js');
+const Games = require('../database/collections/games.js');
+const Game = require('../database/models/game.js');
 const cors = require('cors');
 const app = express();
 const port = 3049;
@@ -31,6 +33,16 @@ app.get('/api/users', (req, res) => {
       res.status(200).send(users.models);
     });
 });
+
+app.get('/api/games/', (req, res) => {
+  Games.reset()
+    .fetch()
+    .then((games) => {
+      res.status(200).send(games.models);
+    });
+});
+
+
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}.`);

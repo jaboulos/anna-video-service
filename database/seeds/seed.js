@@ -1619,15 +1619,32 @@ const sampleUser = {
   ]
 };
 
+const sampleGames = {
+  data: [
+    {
+      id: '488552',
+      name: 'Overwatch',
+      box_art_url: 'https://static-cdn.jtvnw.net/ttv-boxart/Overwatch-60x85.jpg'
+    }
+  ]
+};
+
+
 exports.seed = function(knex, Promise) {
   return knex('users').del()
     .then(() => {
       return knex('videos').del();
     })
     .then(() => {
+      return knex('games').del();
+    })
+    .then(() => {
       return knex('users').insert(sampleUser.data);
     })
     .then(() => {
       return knex('videos').insert(sampleVideos.data);
+    })
+    .then(() => {
+      return knex('games').insert(sampleGames.data);
     });
 };

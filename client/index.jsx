@@ -10,8 +10,8 @@ class App extends React.Component {
     this.state = {
       isLoaded: false,
       error: null,
-      users: [],
-      games: [],
+      user: null,
+      games: null,
       videos: null
     };
   }
@@ -29,6 +29,34 @@ class App extends React.Component {
           isLoaded: true,
           error
         });
+      }).then(() => {
+        axios.get('http://127.0.0.1:3049/api/users')
+          .then((result) => {
+            this.setState({
+              isLoaded: true,
+              user: result.data[0],
+            });
+          }, (error) => {
+            console.log('Error retrieving user: ', error);
+            this.setState({
+              isLoaded: true,
+              error
+            });
+          });
+      }).then(()=> {
+        axios.get('http://127.0.0.1:3049/api/games')
+          .then((result) => {
+            this.setState({
+              isLoaded: true,
+              games: result.data,
+            });
+          }, (error) => {
+            console.log('Error retrieving games: ', error);
+            this.setState({
+              isLoaded: true,
+              error
+            });
+          });
       });
   }
 
@@ -41,26 +69,28 @@ class App extends React.Component {
       return (
         <Router>
           <div>
-            <Route exact={true} path="/" render={() => (
-              <div className="preview-card">
-                {this.state.videos.map((video) => {
-                  return (
-                    <li>
-                      <Link to={`videos/${video.id}`}>
-                        <img src={video.thumbnail_url}/>
-                        <div>{video.title}</div>
-                      </Link>
-                      <div>{video.user_name}</div>
-                      <div>Game title goes here</div>
-                      <div>Duration: {video.duration}</div>
-                    </li>
-                  );
-                })}
-              </div>
-            )}/>
+            {this.state.games && (
+              <Route exact={true} path="/" render={() => (
+                <div className="preview-card">
+                  {this.state.videos.map((video) => {
+                    return (
+                      <li>
+                        <Link to={`videos/${video.id}`}>
+                          <img src={video.thumbnail_url}/>
+                          <div>{video.title}</div>
+                        </Link>
+                        <div><img src={this.state.games[0].box_art_url} /></div>
+                        <div>{video.user_name}</div>
+                        <div className="video-length">Duration: {video.duration}</div>
+                        <div className="video-views">{video.view_count} views</div>
+                      </li>
+                    );
+                  })}
+                </div>
+              )}/>)}
             {this.state.videos && (
               <Route path='/videos/:videoId' render={({match}) => (
-                <VideoPlayer video={this.state.videos.find(video => video.id.toString() === match.params.videoId )}/>
+                <VideoPlayer video={this.state.videos.find(video => video.id.toString() === match.params.videoId )} game={this.state.games[0]}/>
               )}/>
             )}
           </div>
@@ -69,5 +99,6 @@ class App extends React.Component {
     }
   }
 }
+
 
 ReactDOM.render(<App />, document.getElementById('videomodule'));

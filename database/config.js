@@ -58,4 +58,16 @@ db.knex.schema.hasTable('videos').then(function(exists) {
   }
 });
 
+db.knex.schema.hasTable('games').then(function(exists) {
+  if (!exists) {
+    db.knex.schema.createTable('games', function(table) {
+      table.increments('id').primary();
+      table.string('name', 255);
+      table.string('box_art_url', 255);
+    }).then(function(table) {
+      console.log('Created Table: ', table);
+    });
+  }
+});
+
 module.exports = db;
