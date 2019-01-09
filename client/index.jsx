@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import moment from 'moment';
 import VideoPlayer from './VideoPlayer.jsx';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { Switch, HashRouter, Route, Link } from 'react-router-dom';
 
 class App extends React.Component {
   constructor(props) {
@@ -12,8 +13,12 @@ class App extends React.Component {
       error: null,
       user: null,
       games: null,
-      videos: null
+      videos: null,
+      value: 'Date'
     };
+
+    this.changeVideos = this.changeVideos.bind(this);
+    this.renderVideos = this.renderVideos.bind(this);
   }
 
   componentDidMount() {
@@ -60,6 +65,54 @@ class App extends React.Component {
       });
   }
 
+  changeVideos(event) {
+    this.setState({value: event.target.value});
+  }
+
+  renderVideos() {
+    if (this.state.value === 'Popular') {
+      return (
+        this.state.videos.sort((a, b) => b.view_count - a.view_count).map((video) => {
+          return (
+            <li>
+              <div className="link-to-video">
+                <Link to={`videos/${video.id}`}>
+                  <img src={video.thumbnail_url}/>
+                  <div className="video-title">{video.title}</div>
+                </Link>
+              </div>
+              <div className="game-box-art"><img src={this.state.games[0].box_art_url} /></div>
+              <div className="streamer-name">{video.user_name}</div>
+              <div className="on-video">Duration: {video.duration}</div>
+              <div className="on-video">{video.view_count} views</div>
+              <div className="on-video">{moment(video.created_at).fromNow()}</div>
+            </li>
+          );
+        })
+      );
+    } else {
+      return (
+        this.state.videos.sort((a, b) => moment(b.created_at).format('X') - moment(a.created_at).format('X')).map((video) => {
+          return (
+            <li>
+              <div className="link-to-video">
+                <Link to={`videos/${video.id}`}>
+                  <img src={video.thumbnail_url}/>
+                  <div className="video-title">{video.title}</div>
+                </Link>
+              </div>
+              <div className="game-box-art"><img src={this.state.games[0].box_art_url} /></div>
+              <div className="streamer-name">{video.user_name}</div>
+              <div className="on-video">Duration: {video.duration}</div>
+              <div className="on-video">{video.view_count} views</div>
+              <div className="on-video">{moment(video.created_at).fromNow()}</div>
+            </li>
+          );
+        })
+      );
+    }
+  }
+
   render() {
     if (this.state.error) {
       return (<div>Error...{this.state.error.message}</div>);
@@ -67,34 +120,31 @@ class App extends React.Component {
       return <div>Loading...</div>;
     } else {
       return (
-        <Router>
-          <div>
-            {this.state.games && (
-              <Route exact={true} path="/" render={() => (
-                <div className="preview-card">
-                  {this.state.videos.map((video) => {
-                    return (
-                      <li>
-                        <Link to={`videos/${video.id}`}>
-                          <img src={video.thumbnail_url}/>
-                          <div>{video.title}</div>
-                        </Link>
-                        <div><img src={this.state.games[0].box_art_url} /></div>
-                        <div>{video.user_name}</div>
-                        <div className="video-length">Duration: {video.duration}</div>
-                        <div className="video-views">{video.view_count} views</div>
-                      </li>
-                    );
-                  })}
-                </div>
-              )}/>)}
-            {this.state.videos && (
-              <Route path='/videos/:videoId' render={({match}) => (
-                <VideoPlayer video={this.state.videos.find(video => video.id.toString() === match.params.videoId )} game={this.state.games[0]}/>
-              )}/>
-            )}
-          </div>
-        </Router>
+        <HashRouter>
+          <Switch>
+            <div className="video-collection">
+              {this.state.games && (
+                <Route exact={true} path="/" render={() => (
+                  <div>
+                  Sorted By
+                    <select className="sort-collection" value={this.state.value} onChange={this.changeVideos}>
+                      <option value="Date">Date</option>
+                      <option value="Popular">Popular</option>
+                    </select>
+                    <div className="videos">
+                      {this.renderVideos()}
+                    </div>
+                  </div>
+                )}/>
+              )}
+              {this.state.videos && (
+                <Route path='/videos/:videoId' render={({match}) => (
+                  <VideoPlayer video={this.state.videos.find(video => video.id.toString() === match.params.videoId )} game={this.state.games[0]}/>
+                )}/>
+              )}
+            </div>
+          </Switch>
+        </HashRouter>
       );
     }
   }
