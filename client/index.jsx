@@ -2,8 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import moment from 'moment';
-import VideoPlayer from './VideoPlayer.jsx';
-import { Switch, HashRouter, Route, Link } from 'react-router-dom';
+import VideoPlayer from './components/VideoPlayer.jsx';
+import VideoCollectionEntry from './components//VideoCollectionEntry.jsx';
+import { Switch, HashRouter, Route } from 'react-router-dom';
 
 class App extends React.Component {
   constructor(props) {
@@ -74,19 +75,7 @@ class App extends React.Component {
       return (
         this.state.videos.sort((a, b) => b.view_count - a.view_count).map((video) => {
           return (
-            <li>
-              <div className="link-to-video">
-                <Link to={`videos/${video.id}`}>
-                  <img src={video.thumbnail_url}/>
-                  <div className="video-title">{video.title}</div>
-                </Link>
-              </div>
-              <div className="game-box-art"><img src={this.state.games[0].box_art_url} /></div>
-              <div className="streamer-name">{video.user_name}</div>
-              <div className="on-video">Duration: {video.duration}</div>
-              <div className="on-video">{video.view_count} views</div>
-              <div className="on-video">{moment(video.created_at).fromNow()}</div>
-            </li>
+            <VideoCollectionEntry video={video} game={this.state.games[0]} />
           );
         })
       );
@@ -94,19 +83,7 @@ class App extends React.Component {
       return (
         this.state.videos.sort((a, b) => moment(b.created_at).format('X') - moment(a.created_at).format('X')).map((video) => {
           return (
-            <li>
-              <div className="link-to-video">
-                <Link to={`videos/${video.id}`}>
-                  <img src={video.thumbnail_url}/>
-                  <div className="video-title">{video.title}</div>
-                </Link>
-              </div>
-              <div className="game-box-art"><img src={this.state.games[0].box_art_url} /></div>
-              <div className="streamer-name">{video.user_name}</div>
-              <div className="on-video">Duration: {video.duration}</div>
-              <div className="on-video">{video.view_count} views</div>
-              <div className="on-video">{moment(video.created_at).fromNow()}</div>
-            </li>
+            <VideoCollectionEntry video={video} game={this.state.games[0]} />
           );
         })
       );
@@ -151,4 +128,4 @@ class App extends React.Component {
 }
 
 
-ReactDOM.render(<App />, document.getElementById('videomodule'));
+ReactDOM.render(<App />, document.getElementById('video-module'));
