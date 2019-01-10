@@ -2,9 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import moment from 'moment';
+import { Switch, HashRouter, Route } from 'react-router-dom';
+
 import VideoPlayer from './components/VideoPlayer.jsx';
 import VideoCollectionEntry from './components//VideoCollectionEntry.jsx';
-import { Switch, HashRouter, Route } from 'react-router-dom';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -73,19 +75,21 @@ class App extends React.Component {
   renderVideos() {
     if (this.state.value === 'Popular') {
       return (
-        this.state.videos.sort((a, b) => b.view_count - a.view_count).map((video) => {
-          return (
-            <VideoCollectionEntry video={video} game={this.state.games[0]} />
-          );
-        })
+        this.state.videos.sort((a, b) => b.view_count - a.view_count)
+          .map((video) => {
+            return (
+              <VideoCollectionEntry video={video} game={this.state.games[0]} />
+            );
+          })
       );
     } else {
       return (
-        this.state.videos.sort((a, b) => moment(b.created_at).format('X') - moment(a.created_at).format('X')).map((video) => {
-          return (
-            <VideoCollectionEntry video={video} game={this.state.games[0]} />
-          );
-        })
+        this.state.videos.sort((a, b) => moment(b.created_at).format('X') - moment(a.created_at).format('X'))
+          .map((video) => {
+            return (
+              <VideoCollectionEntry video={video} game={this.state.games[0]} />
+            );
+          })
       );
     }
   }
@@ -116,7 +120,10 @@ class App extends React.Component {
               )}
               {this.state.videos && (
                 <Route path='/videos/:videoId' render={({match}) => (
-                  <VideoPlayer video={this.state.videos.find(video => video.id.toString() === match.params.videoId )} game={this.state.games[0]}/>
+                  <VideoPlayer
+                    video={this.state.videos.find(video => video.id.toString() === match.params.videoId )}
+                    game={this.state.games[0]}
+                  />
                 )}/>
               )}
             </div>
