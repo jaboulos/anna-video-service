@@ -136,3 +136,5 @@ class App extends React.Component {
 
 
 ReactDOM.render(<App />, document.getElementById('video-module'));
+
+export default App;
