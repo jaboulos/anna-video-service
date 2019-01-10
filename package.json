@@ -7,9 +7,6 @@
   "engines": {
     "node": ">=6.13.0"
   },
-  "jest" : {
-    "snapshotSerializers": ["enzyme-to-json/serializer"]
-  },
   "scripts": {
     "test": "jest",
     "dev:react": "webpack -d --watch",
