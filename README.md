@@ -37,3 +37,11 @@ npm install -g webpack
 npm install
 ```
 
+TODO:
+
+-Instructions for installing postgresql
+  -brew install postgresql
+-Instructions for initializing postgresql
+  -Login user: taco
+  -password: tuesday
+  -To connect: psql -d twitchvid -u taco
