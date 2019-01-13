@@ -102,7 +102,7 @@ class App extends React.Component {
       return (
         <HashRouter>
           <Switch>
-            <div className="video-collection">
+            <div>
               {this.state.games && (
                 <Route exact={true} path="/" render={() => (
                   <div>
