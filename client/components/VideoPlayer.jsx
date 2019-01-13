@@ -9,7 +9,7 @@ const VideoPlayerStyle = styled.div`
   borderWidth: 1px;
   text-align: left;
   vertical-align: top;
-  font-size: 20px;
+  font-size: 19px;
   font-weight: 350;
   background-color: #faf9fa;
   box-shadow: 5px 5px 2px 1px #dad8de;
