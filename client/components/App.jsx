@@ -102,9 +102,17 @@ class App extends React.Component {
       return (
         <HashRouter>
           <Switch>
-            <div className="video-collection">
+            <div>
               {this.state.games && (
-                <Route exact={true} path="/" render={() => (
+                <Route exact={true} path='/' render={ () => (
+                  <VideoPlayer
+                    video={this.state.videos[0]}
+                    game={this.state.games[0]}
+                  />
+                )}/>
+              )}
+              {this.state.games && (
+                <Route exact={true} path="/videos" render={() => (
                   <div>
                   Sorted By
                     <select className="sort-collection" value={this.state.value} onChange={this.changeVideos}>
