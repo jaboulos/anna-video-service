@@ -5,11 +5,12 @@ import styled from 'styled-components';
 const VideoPlayerStyle = styled.div`
   display: inline-block;
   width: 1081px;
+  box-sizing: content-box;
   borderStyle: solid;
   borderWidth: 1px;
   text-align: left;
   vertical-align: top;
-  font-size: 20px;
+  font-size: 19px;
   font-weight: 350;
   background-color: #faf9fa;
   box-shadow: 5px 5px 2px 1px #dad8de;

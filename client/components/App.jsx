@@ -2,10 +2,27 @@ import React from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import { Switch, HashRouter, Route } from 'react-router-dom';
-
+import styled from 'styled-components';
 import VideoPlayer from './VideoPlayer.jsx';
 import VideoCollectionEntry from './VideoCollectionEntry.jsx';
 
+const StyledSortBy = styled.div`
+  box-sizing: border-box;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 400;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  line-height: 18px;
+  padding-bottom: 10px;
+  vertical-align: baseline;
+`;
+
+const StyledToggleBalloon = styled.select`
+  border: 1px #6441a4;
+  color: #6441a4;
+  position: relative;
+  text-decoration: none;
+`;
 
 class App extends React.Component {
   constructor(props) {
@@ -114,12 +131,14 @@ class App extends React.Component {
               {this.state.games && (
                 <Route exact={true} path="/videos" render={() => (
                   <div>
-                  Sorted By
-                    <select className="sort-collection" value={this.state.value} onChange={this.changeVideos}>
-                      <option value="Date">Date</option>
-                      <option value="Popular">Popular</option>
-                    </select>
-                    <div className="videos">
+                    <StyledSortBy>
+                      <h4>Sorted By</h4>
+                      <StyledToggleBalloon className="sort-collection" value={this.state.value} onChange={this.changeVideos}>
+                        <option value="Date">Date</option>
+                        <option value="Popular">Popular</option>
+                      </StyledToggleBalloon>
+                    </StyledSortBy>
+                    <div>
                       {this.renderVideos()}
                     </div>
                   </div>
