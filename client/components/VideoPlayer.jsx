@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const VideoPlayerStyle = styled.div`
   display: inline-block;
-  width: 1080px;
+  width: 1081px;
   borderStyle: solid;
   borderWidth: 1px;
   text-align: left;
