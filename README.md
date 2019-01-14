@@ -1,6 +1,6 @@
 # Project Name
 
-> Project description
+> This is the repo for the HR RPT10 FEC Project on the Twitch.TV Video Service. This repo renders the video player and video collection to the page.
 
 ## Related Projects
 
@@ -23,8 +23,7 @@
 
 An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 
-- Node 6.13.0
-- etc
+- Node v11.6.0
 
 ## Development
 
@@ -33,25 +32,36 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 From within the root directory:
 
 ```sh
-npm install -g webpack
-npm install
+-npm install
+-npm dev:react to start webpack
+-npm start to run the server
 ```
 
-TODO:
+```sh
+Postgresql Instructions:
 
--Instructions for installing postgresql
-  -brew install postgresql
+-brew install postgresql
+-Connect to default database:
+  /* psql postgres */
+-Create a new role:
+  /* CREATE ROLE taco WITH LOGIN PASSWORD 'tuesday'; */
+-Create the database:
+  /* CREATE DATABASE twitchvid;
+-Connect to the new database:
+  /* \c twitchvid */
+-To seed sample data into the database:
+  /* npm run seed */
+-Helpful command tips can be found here:
+  https://gist.github.com/Kartones/dd3ff5ec5ea238d4c546
+```
 
+```sh
+Getting new data from twitch
 
--Instructions for initializing postgresql
-  -Login user: taco
-  -password: tuesday
-  -To connect: psql -d twitchvid -u taco
+-Go to dev.twitch.com and sign up for a new account
+-Locate your client-ID with the instructions provided on the website
+-Follow the API instructions for more info on how to obtain specific sets of data. Here is one example of obtaining data from Twitch Streamer A_Seagull:
 
--Instructions to obtain Twtich API Data
-  /*
-
-curl -H 'Client-ID: bq8806sjkivttwp7o6gwuzw57stpc5' \
+  curl -H 'Client-ID: <ClientID Here>' \
 -X GET 'https://api.twitch.tv/helix/videos?user_id=19070311&first=100'
-
-*/
+```
