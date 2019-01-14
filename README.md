@@ -1,6 +1,6 @@
 # Project Name
 
-> Project description
+> This is the repo for the HR RPT10 FEC Project on the Twitch.TV Video Service. This repo renders the video player and video collection to the page.
 
 ## Related Projects
 
@@ -23,8 +23,7 @@
 
 An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 
-- Node 6.13.0
-- etc
+- Node v11.6.0
 
 ## Development
 
