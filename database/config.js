@@ -1,8 +1,4 @@
-/*
-  TODO:
 
-    -Include code for creating 'twitchvid' DB and user information for migration
-*/
 const path = require('path');
 
 let knex = require('knex')({
