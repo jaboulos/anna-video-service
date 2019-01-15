@@ -40,18 +40,36 @@ From within the root directory:
 ```sh
 Postgresql Instructions:
 
--brew install postgresql
+-Install after running npm install
+
+****brew install postgresql
+
 -Connect to default database:
-  /* psql postgres */
+
+  **** psql postgres
+
 -Create a new role:
-  /* CREATE ROLE taco WITH LOGIN PASSWORD 'tuesday'; */
+
+  **** CREATE ROLE taco WITH LOGIN PASSWORD 'tuesday';
+
 -Create the database:
-  /* CREATE DATABASE twitchvid;
+
+  **** CREATE DATABASE twitchvid;
+
 -Connect to the new database:
-  /* \c twitchvid */
--To seed sample data into the database:
-  /* npm run seed */
+
+  **** \c twitchvid
+
+-Create tables:
+
+  **** npm start
+
+-To seed sample data into the database, in another terminal window run:
+
+  **** npm run seed
+
 -Helpful command tips can be found here:
+
   https://gist.github.com/Kartones/dd3ff5ec5ea238d4c546
 ```
 
