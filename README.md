@@ -52,6 +52,10 @@ Postgresql Instructions:
 
   **** CREATE ROLE taco WITH LOGIN PASSWORD 'tuesday';
 
+-Allow the new role, taco, to create databases:
+
+**** ALTER ROLE taco CREATEDB;
+
 -Create the database:
 
   **** CREATE DATABASE twitchvid;
