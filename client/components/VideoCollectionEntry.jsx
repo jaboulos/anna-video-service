@@ -1,131 +1,122 @@
 import React from 'react';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+const styles = {};
 
-const VideoCollectionStyle = styled.li`
-  display: inline-block;
-  box-sizing: border-box;
-  list-style: none;
-  list-style-position: outside;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-bottom: 20px;
-  text-overflow: clip;
-  text-align: left;
-  vertical-align: baseline;
-  color: #19171c;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  width: 360px;
-`;
+styles.videoCollectionEntry = {
+  display: 'inline-block',
+  boxSizing: 'border-box',
+  listStyle: 'none',
+  listStylePosition: 'outside',
+  paddingLeft: '10px',
+  paddingRight: '10px',
+  marginBottom: '20px',
+  textOverflow: 'clip',
+  textAlign: 'left',
+  verticalAlign: 'baseline',
+  color: '#19171c',
+  fontFamily: 'Helvetica Neue',
+  width: '360px'
+};
 
-const StyledContainerDiv = styled.div`
-  max-width: 360px;
-  display: block;
-`;
+styles.styledContainerDiv = {
+  maxWidth: '360px',
+  display: 'block'
+};
 
-const StyledPreviewImg = styled.img`
-  width: 100%;
-  border-radius: 6px;
-  position: relative;
-`;
+styles.styledPreviewImg = {
+  width: '100%',
+  borderRadius: '6px',
+  position: 'relative'
+};
 
-const StyledVideoDetailsBackground = styled.div`
-background-color: #19171c;
-border-radius: 2px;
-opacity: 0.6;
-padding-top: 2px;
-padding-left: 2px;
-padding-right: 2px;
-padding-bottom: 2px;
-transform: translate(5%, -120%);
-position: absolute;
-box-shadow: none;
-width: 80px;
-`;
+styles.styledVideoDetailsBackground = {
+  backgroundColor: '#19171c',
+  borderRadius: '2px',
+  opacity: '0.6',
+  padding: '2px',
+  transform: 'translate(5%, -120%)',
+  position: 'absolute',
+  boxShadow: 'none',
+  width: '80px'
+};
 
-const StyledVideoDetails = styled.div`
-  color: white;
-  font-size: 11px;
-  opacity: 1.0;
-`;
+styles.styledVideoDetails = {
+  color: 'white',
+  fontSize: '11px',
+  opacity: '1.0'
+};
 
-const StyledVideoInfo = styled.div`
-  margin-top: 10px;
-  display: flex;
-  flex-wrap: nowrap;
-  background-color: none;
-`;
+styles.styledVideoInfo = {
+  marginTop: '10px',
+  display: 'flex',
+  flexWrap: 'nowrap',
+  backgroundColor: 'none'
+};
 
-const StyledGameImg = styled.img`
-  left: 0;
-  position: relative;
-  vertical-align: top;
-  margin-right: 10px;
-  border-radius: 2px;
-  overflow: hidden;
-  flex-grow: 0;
-  flex-shrink: 0;
-  transform: translateY(-10%);
-`;
+styles.styledGameImg = {
+  left: '0',
+  position: 'relative',
+  verticalAlign: 'top',
+  marginRight: '10px',
+  borderRadius: '2px',
+  overflow: 'hidden',
+  flexGrow: '0',
+  flexShrink: '0',
+  transform: 'translateY(-10%)'
+};
 
-const StyledVideoText = styled.div`
-  flex-grow: 1;
-  flex-shrink: 1;
-  width: 100%;
-`;
+styles.styledVideoText = {
+  flexGrow: '1',
+  flexShrink: '1',
+  width: '100%'
+};
 
-const StyledLink = styled(Link)`
-  display: block;
-  color: #19171c;
-  max-width: 260px;
-  font-weight: bolder;
-  text-decoration: none;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  &: hover {
-    color: #6441a4;
-    text-decoration: underline;
-`;
+styles.styledLink = {
+  display: 'block',
+  color: '#19171c',
+  maxWidth: '260px',
+  fontWeight: 'bolder',
+  textDecoration: 'none',
+  textOverflow: 'ellipsis',
+  overflow: 'hidden',
+  whiteSpace: 'nowrap',
+};
 
-const StyledDiv = styled.div`
-  color: #19171c;
-  cursor: pointer;
-  font-size: 12px;
-  font-weight: 400;
-  &: hover {
-    color: #6441a4;
-    text-decoration: underline;
-`;
+styles.styledDiv = {
+  color: '#19171c',
+  cursor: 'pointer',
+  fontSize: '12px',
+  fontWeight: '400'
+};
 
 
 const VideoCollectionEntry = (props) => {
   return (
-    <VideoCollectionStyle>
-      <StyledContainerDiv>
+    <li style={styles.videoCollectionEntry}>
+      <div style={styles.styledContainerDiv}>
         <Link to={`videos/${props.video.id}`}>
-          <StyledPreviewImg src={props.video.thumbnail_url}/>
-          <StyledVideoDetailsBackground>
-            <StyledVideoDetails>
+          <img style={styles.styledPreviewImg} src={props.video.thumbnail_url}/>
+          <div style={styles.styledVideoDetailsBackground}>
+            <div style={styles.styledVideoDetails}>
               <div>{props.video.duration}</div>
               <div>{props.video.view_count} views</div>
               <div>{moment(props.video.created_at).fromNow()}</div>
-            </StyledVideoDetails>
-          </StyledVideoDetailsBackground>
+            </div>
+          </div>
         </Link>
-        <StyledVideoInfo>
-          <StyledGameImg src={props.game.box_art_url} />
-          <StyledVideoText>
-            <StyledLink to={`videos/${props.video.id}`}>
+        <div style={styles.styledVideoInfo}>
+          <img style={styles.styledGameImg} src={props.game.box_art_url} />
+          <div style={styles.styledVideoText}>
+            <Link to={`videos/${props.video.id}`} style={styles.styledLink}>
               {props.video.title}
-            </StyledLink>
-            <StyledDiv>{props.video.user_name}</StyledDiv>
-            <StyledDiv>{props.game.name}</StyledDiv>
-          </StyledVideoText>
-        </StyledVideoInfo>
-      </StyledContainerDiv>
-    </VideoCollectionStyle>
+            </Link>
+            <div style={styles.styledDiv}>{props.video.user_name}</div>
+            <div style={styles.styledDiv}>{props.game.name}</div>
+          </div>
+        </div>
+      </div>
+    </li>
   );
 };
 
