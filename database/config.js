@@ -17,14 +17,7 @@ db.knex.schema.hasTable('users').then(function(exists) {
   if (!exists) {
     db.knex.schema.createTable('users', function(table) {
       table.increments('id').primary();
-      table.string('login', 255);
       table.string('display_name', 255);
-      table.string('type', 255);
-      table.string('broadcaster_type', 255);
-      table.string('description', 255);
-      table.string('profile_image_url', 255);
-      table.string('offline_image_url', 255);
-      table.integer('view_count');
     }).then(function(table) {
       console.log('Created Table: ', table);
     });
