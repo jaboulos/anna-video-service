@@ -1,6 +1,5 @@
 const sampleVideos = {
-  data: [
-    {
+  data: [{
       id: '355571395',
       user_id: '19070311',
       user_name: 'A_Seagull',
@@ -1603,48 +1602,12 @@ const sampleVideos = {
   ]
 };
 
-const sampleUser = {
-  data: [
-    {
-      id: '19070311',
-      login: 'a_seagull',
-      display_name: 'A_Seagull',
-      type: '',
-      broadcaster_type: 'partner',
-      description: 'COMPETITIVE GAMING ENTHUSIAST',
-      profile_image_url: 'https://static-cdn.jtvnw.net/jtv_user_pictures/a_seagull-profile_image-4d2d235688c7dc66-300x300.png',
-      offline_image_url: 'https://static-cdn.jtvnw.net/jtv_user_pictures/f755a397-2b1c-45d8-a418-8893c6811755-channel_offline_image-1920x1080.png',
-      view_count: 27857135
-    }
-  ]
-};
-
-const sampleGames = {
-  data: [
-    {
-      id: '488552',
-      name: 'Overwatch',
-      box_art_url: 'https://static-cdn.jtvnw.net/ttv-boxart/Overwatch-60x85.jpg'
-    }
-  ]
+const sampleGame = {
+  id: '488552',
+  name: 'Overwatch',
+  box_art_url: 'https://static-cdn.jtvnw.net/ttv-boxart/Overwatch-60x85.jpg'
 };
 
 
-exports.seed = function(knex, Promise) {
-  return knex('users').del()
-    .then(() => {
-      return knex('videos').del();
-    })
-    .then(() => {
-      return knex('games').del();
-    })
-    .then(() => {
-      return knex('users').insert(sampleUser.data);
-    })
-    .then(() => {
-      return knex('videos').insert(sampleVideos.data);
-    })
-    .then(() => {
-      return knex('games').insert(sampleGames.data);
-    });
-};
+module.exports.sampleVideos = sampleVideos;
+module.exports.sampleGame = sampleGame;

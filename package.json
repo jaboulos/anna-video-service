@@ -11,7 +11,7 @@
     "test": "jest",
     "dev:react": "webpack -d --watch",
     "start": "nodemon ./server/index.js",
-    "seed": "knex seed:run"
+    "seed": "node --max-old-space-size=3072 ./database/seed.js"
   },
   "dependencies": {
     "bookshelf": "^0.14.2",

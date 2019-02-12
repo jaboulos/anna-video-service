@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const schema = require('./schemas');
 
-const User = mongoose.model('Users', schema.userSchema);
+const User = mongoose.model('User', schema.userSchema);
 
 const Video = mongoose.model('Video', schema.videoSchema);
 
