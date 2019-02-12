@@ -1,11 +1,8 @@
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
-
-const db = require('../database/config.js');
-const Videos = require('../database/collections/videos.js');
-const Users = require('../database/collections/users.js');
-const Games = require('../database/collections/games.js');
+const mongoose = require('mongoose');
+const models = require('../database/models');
 
 const app = express();
 
@@ -14,33 +11,40 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true, }));
 app.use(express.static(path.join(__dirname, '../public')));
 
+mongoose.connect('mongodb://localhost/twitchVideoService', { useNewUrlParser: true });
+
 app.get('/', (req, res) => {
   res.status(200);
 });
 
-
 app.get('/api/videos', (req, res) => {
-  Videos.reset()
-    .fetch()
+  models.Video.find()
     .then((videos) => {
-      res.status(200).send(videos.models);
-    });
+      res.status(200).send(videos);
+    })
+    .catch(err => {
+      console.log('something went wrong', err);
+    })
 });
 
 app.get('/api/users', (req, res) => {
-  Users.reset()
-    .fetch()
-    .then((users) => {
-      res.status(200).send(users.models);
-    });
+  models.User.find(null, null, { limit: 1 })
+  .then((users) => {
+    res.status(200).send(users);
+  })
+  .catch(err => {
+    console.log('something went wrong', err);
+  });
 });
 
 app.get('/api/games/', (req, res) => {
-  Games.reset()
-    .fetch()
-    .then((games) => {
-      res.status(200).send(games.models);
-    });
+  models.Game.find()
+  .then((games) => {
+    res.status(200).send(games);
+  })
+  .catch(err => {
+    console.log('something went wrong', err);
+  });
 });
 
 module.exports = app;
