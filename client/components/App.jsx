@@ -41,6 +41,7 @@ class App extends React.Component {
       .get('http://127.0.0.1:3049/api/videos')
       .then(
         result => {
+          console.log('🗺', result)
           this.setState({
             isLoaded: true,
             videos: result.data
@@ -130,7 +131,7 @@ class App extends React.Component {
                   path="/"
                   render={() => (
                     <VideoPlayer
-                      video={this.state.videos[0]}
+                      video={this.state.videos[1]}
                       game={this.state.games[0]}
                     />
                   )}

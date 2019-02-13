@@ -18,7 +18,6 @@ app.get('/', (req, res) => {
   res.status(200);
 });
 
-
 app.get('/api/videos', (req, res) => {
   Videos.reset()
     .fetch()
@@ -29,6 +28,7 @@ app.get('/api/videos', (req, res) => {
 
 app.get('/api/users', (req, res) => {
   Users.reset()
+    .query('where', 'id','=', 1)
     .fetch()
     .then((users) => {
       res.status(200).send(users.models);
