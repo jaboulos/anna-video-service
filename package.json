@@ -11,15 +11,17 @@
     "test": "jest",
     "dev:react": "webpack -d --watch",
     "start": "nodemon ./server/index.js",
-    "seed": "knex seed:run"
+    "seed": "node --max-old-space-size=3072 ./database/seed.js"
   },
   "dependencies": {
     "bookshelf": "^0.14.2",
     "cors": "^2.8.5",
     "enzyme": "^3.8.0",
     "express": "^4.16.4",
+    "faker": "^4.1.0",
     "jest": "^23.6.0",
     "knex": "^0.16.3",
+    "mongoose": "^5.4.11",
     "morgan": "^1.9.1",
     "nodemon": "^1.18.9",
     "pg": "^7.7.1",
