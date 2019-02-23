@@ -35,15 +35,15 @@ app.get('/api/videos', (req, res) => {
 });
 
 app.get('/api/users', (req, res) => {
+  const id = req.body.id ? req.body.id : 1;
   Users.reset()
-    .query('where', 'id','=', 1)
+    .query('where', 'id','=', id)
     .fetch()
     .then((users) => {
       res.status(200).send(users.models);
     });
 });
 
-//CREATE NEW ITEM
 app.post('/api/users', (req, res) => {
   const username = req.body.username;
   new User({display_name: username})
@@ -56,7 +56,6 @@ app.post('/api/users', (req, res) => {
     })
 });
 
-//UPDATE ITEM
 app.put('/api/users', (req, res) => {
   const idToUpdate = req.body.id;
   const username = req.body.username;
@@ -70,12 +69,17 @@ app.put('/api/users', (req, res) => {
     })
 });
 
-//DELETE AN ITEM
-app.delete('api/users', (req, res) => {
-
+app.delete('/api/users', (req, res) => {
+  const id = req.body.id;
+  new User({ id })
+   .destroy()
+   .then(() => {
+     res.status(200).send('user deleted');
+   })
+    .catch(err => {
+      console.error('something went wrong with deleting a user', err);
+    })
 });
-
-
 
 app.get('/api/games/', (req, res) => {
   Games.reset()
