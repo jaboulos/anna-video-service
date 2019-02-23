@@ -58,7 +58,16 @@ app.post('/api/users', (req, res) => {
 
 //UPDATE ITEM
 app.put('/api/users', (req, res) => {
-
+  const idToUpdate = req.body.id;
+  const username = req.body.username;
+  User.forge({id: idToUpdate, display_name: username})
+    .save()
+    .then(updatedUser => {
+      res.status(200).send(updatedUser.attributes);
+    })
+    .catch(err => {
+      console.error('something went wrong with updated a user', err);
+    })
 });
 
 //DELETE AN ITEM
