@@ -1,3 +1,4 @@
+require('dotenv').config({ path: '/Users/anna/Desktop/Hack Reactor/RPT_Course/anna-chat-proxy/src/faris-video-service-component/.env',  debug: process.env.DEBUG});
 const express = require('express');
 const path = require('path');
 const cors = require('cors');

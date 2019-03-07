@@ -20,8 +20,6 @@ exports.seed = async (knex) => {
   }
 };
 
-//OLD SEED SCRIPT:
-
 // const sampleVideos = {
 //   data: [
 //     {
