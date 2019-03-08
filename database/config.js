@@ -4,10 +4,10 @@ const path = require('path');
 let knex = require('knex')({
   client: 'pg',
   connection: {
-    host: process.env.DB_IP,
+    host: 'ec2-54-183-116-44.us-west-1.compute.amazonaws.com',
     port: 5432,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
+    user: 'taco',
+    password: 'tuesday',
     database: 'twitchvid'
   },
 });
