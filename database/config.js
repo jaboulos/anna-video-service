@@ -61,3 +61,4 @@ db.knex.schema.hasTable('games').then(function(exists) {
 });
 
 module.exports = db;
+
