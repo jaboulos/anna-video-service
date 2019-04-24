@@ -1,9 +1,11 @@
 import React from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import moment from 'moment';
 import { Switch, HashRouter, Route } from 'react-router-dom';
 import VideoPlayer from './VideoPlayer.jsx';
 import VideoCollectionEntry from './VideoCollectionEntry.jsx';
+import sampleVideos from '../../database/seeds/seed';
+
 const styles = {};
 styles.styledSortBy = {
   boxSizing: 'border-box',
@@ -26,70 +28,70 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoaded: false,
+      isLoaded: true,
       error: null,
-      user: null,
-      games: null,
-      videos: null,
+      user: sampleVideos[0],
+      games: sampleVideos,
+      videos: sampleVideos,
       value: 'Date'
     };
     this.changeVideos = this.changeVideos.bind(this);
     this.renderVideos = this.renderVideos.bind(this);
   }
-  componentDidMount() {
-    axios
-      .get('http://127.0.0.1:3049/api/videos')
-      .then(
-        result => {
-          console.log('🗺', result)
-          this.setState({
-            isLoaded: true,
-            videos: result.data
-          });
-        },
-        error => {
-          console.log('Error retrieving videos: ', error);
-          this.setState({
-            isLoaded: true,
-            error
-          });
-        }
-      )
-      .then(() => {
-        axios.get('http://127.0.0.1:3049/api/users').then(
-          result => {
-            this.setState({
-              isLoaded: true,
-              user: result.data[0]
-            });
-          },
-          error => {
-            console.log('Error retrieving user: ', error);
-            this.setState({
-              isLoaded: true,
-              error
-            });
-          }
-        );
-      })
-      .then(() => {
-        axios.get('http://127.0.0.1:3049/api/games').then(
-          result => {
-            this.setState({
-              isLoaded: true,
-              games: result.data
-            });
-          },
-          error => {
-            console.log('Error retrieving games: ', error);
-            this.setState({
-              isLoaded: true,
-              error
-            });
-          }
-        );
-      });
-  }
+  // componentDidMount() {
+  //   axios
+  //     .get('http://127.0.0.1:3049/api/videos')
+  //     .then(
+  //       result => {
+  //         console.log('🗺', result)
+  //         this.setState({
+  //           isLoaded: true,
+  //           videos: result.data
+  //         });
+  //       },
+  //       error => {
+  //         console.log('Error retrieving videos: ', error);
+  //         this.setState({
+  //           isLoaded: true,
+  //           error
+  //         });
+  //       }
+  //     )
+  //     .then(() => {
+  //       axios.get('http://127.0.0.1:3049/api/users').then(
+  //         result => {
+  //           this.setState({
+  //             isLoaded: true,
+  //             user: result.data[0]
+  //           });
+  //         },
+  //         error => {
+  //           console.log('Error retrieving user: ', error);
+  //           this.setState({
+  //             isLoaded: true,
+  //             error
+  //           });
+  //         }
+  //       );
+  //     })
+  //     .then(() => {
+  //       axios.get('http://127.0.0.1:3049/api/games').then(
+  //         result => {
+  //           this.setState({
+  //             isLoaded: true,
+  //             games: result.data
+  //           });
+  //         },
+  //         error => {
+  //           console.log('Error retrieving games: ', error);
+  //           this.setState({
+  //             isLoaded: true,
+  //             error
+  //           });
+  //         }
+  //       );
+  //     });
+  // }
   changeVideos(event) {
     this.setState({ value: event.target.value });
   }
